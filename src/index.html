@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>calculator</title>
+    <!-- HTML CSS -->
+    <style media="screen">
+      .calcTable {
+        border: 1px solid;
+        height: 500px;
+        width: 500px;
+      }
+
+      .calcTable td {
+        border: 1px solid;
+        text-align: center;
+      }
+
+      .calcTable button {
+        width: 100%;
+        height: 100%;
+      }
+
+      .calcTable input {
+        width: 496px;
+        height: 100%;
+        text-align: right;
+        font-size: 20px;
+      }
+    </style>
+    <!-- HTML CSS -->
+
+    <script type="text/javascript">
+      var operand = 0;
+      var operator = null;
+      var buffer = "";
+
+      function onClickDigit(entry) {
+        if (buffer == '0' && entry == '0') {
+          return;
+        }
+        buffer = buffer.concat(entry);
+        displayBuffer();
+      }
+
+      function displayBuffer() {
+         document.getElementById('display').value = buffer;
+      }
+
+      function onClickOperator(entry) {
+        operator = entry;
+        operand = eval(buffer);
+        buffer = "";
+        displayBuffer();
+      }
+
+      //Clear button
+      function reset() {
+        buffer = "0";
+        operand = 0;
+        operator = null;
+        displayBuffer();
+      }
+
+      //Back button
+      function deleteLast() {
+        //document.getElementById('display').value = buffer.;
+      }
+
+      function onClickEqual() {
+        calculate();
+        displayBuffer();
+      }
+
+      function calculate() {
+        switch (operator) {
+          case "+":
+            buffer = operand + eval(buffer);
+            break;
+          case "-":
+            buffer = operand - eval(buffer);
+            break;
+          case "*":
+            buffer = operand * eval(buffer);
+            break;
+          case "/":
+            buffer = operand / eval(buffer);
+            break;
+        }
+      }
+    </script>
+  </head>
+
+  <body>
+    <table class="calcTable">
+      <tr>
+        <td colspan="4">
+          <input type="text" id="display" value="0">
+        </td>
+      </tr>
+
+      <tr>
+        <td width="25%">
+          <button type="button" name="button" onclick="onClickDigit('7')">7</button>
+        </td>
+        <td width="25%">
+          <button type="button" name="button" onclick="onClickDigit('8')">8</button>
+        </td>
+        <td width="25%">
+          <button type="button" name="button" onclick="onClickDigit('9')">9</button>
+      </td>
+        <td width="25%">
+          <button type="button" name="button" onclick="onClickOperator('+')">+</button>
+      </td>
+      </tr>
+
+      <tr>
+        <td>
+          <button type="button" name="button" onclick="onClickDigit('4')">4</button>
+        </td>
+        <td>
+          <button type="button" name="button" onclick="onClickDigit('5')">5</button>
+        </td>
+        <td>
+          <button type="button" name="button" onclick="onClickDigit('6')">6</button>
+        </td>
+        <td>
+          <button type="button" name="button" onclick="onClickOperator('-')">-</button>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <button type="button" name="button" onclick="onClickDigit('1')">1</button>
+        </td>
+        <td>
+          <button type="button" name="button" onclick="onClickDigit('2')">2</button>
+        </td>
+        <td>
+          <button type="button" name="button" onclick="onClickDigit('3')">3</button>
+        </td>
+        <td>
+          <button type="button" name="button" onclick="onClickOperator('/')">/</button>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <button type="button" name="button" onclick="">(</button>
+        </td>
+        <td>
+          <button type="button" name="button" onclick="onClickDigit('0')">0</button>
+        </td>
+        <td>
+          <button type="button" name="button" onclick="deleteLast()">&lt;--</button>
+        </td>
+        <td>
+          <button type="button" name="button" onclick="onClickOperator('*')">*</button>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <button type="button" name="button" onclick="">)</button>
+        </td>
+        <td colspan="2">
+          <button type="button" name="button" onclick="reset()">Clear</button>
+        </td>
+        <td>
+          <button type="button" name="button" onclick="onClickEqual()">=</button>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>
